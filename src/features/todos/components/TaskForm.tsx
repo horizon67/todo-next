@@ -1,34 +1,37 @@
 import React, { useState } from 'react';
 
 type Props = {
-  onSubmit: (content: string) => void;
+  onCreateTask: (content: string) => void;
 };
 
-export const TaskForm = ({ onSubmit }: Props) => {
-  const [input, setInput] = useState('');
+export const TaskForm = ({ onCreateTask }: Props) => {
+  const [content, setContent] = useState('');
 
-  const handleSubmit = () => {
-    if (input.trim()) {
-      onSubmit(input);
-      setInput('');
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (content) {
+      onCreateTask(content);
+      setContent('');
     }
   };
 
   return (
-    <div className="mb-4 flex">
-      <input
-        className="w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-        type="text"
-        placeholder="Add new task"
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
-      <button
-        className="ml-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-        onClick={handleSubmit}
-      >
-        Add
-      </button>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <div className="mb-4 flex">
+        <input
+          className="w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
+          type="text"
+          placeholder="Add new task"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+        />
+        <button
+          className="ml-2 rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+          type="submit"
+        >
+          Add
+        </button>
+      </div>
+    </form>
   );
 };

@@ -1,23 +1,34 @@
 import React from 'react';
 
+import type { Task } from '../../../../openapi/types/api';
 import { TaskItem } from './TaskItem';
-
-export type Task = {
-  id: number;
-  content: string;
-};
 
 type Props = {
   tasks: Task[];
-  deleteTask: (id: number) => void;
+  onDelete: (id: number) => void;
 };
 
-export const TaskList = ({ tasks, deleteTask }: Props) => {
+const getTaskClassName = (state?: string) => {
+  if (state === 'doing') {
+    return 'bg-blue-200';
+  }
+
+  return '';
+};
+
+export const TaskList = ({ tasks, onDelete }: Props) => {
   return (
-    <ul>
-      {tasks.map((task) => (
-        <TaskItem key={task.id} task={task} onDelete={deleteTask} />
-      ))}
-    </ul>
+    <div>
+      <ul>
+        {tasks.map((task) => (
+          <TaskItem
+            key={task.id}
+            task={task}
+            onDelete={onDelete}
+            className={getTaskClassName(task.state)}
+          />
+        ))}
+      </ul>
+    </div>
   );
 };

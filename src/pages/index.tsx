@@ -1,39 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
+import { TaskForm } from '../features/todos/components/TaskForm';
 import { TaskList } from '../features/todos/components/TaskList';
+import { useTasks } from '../features/todos/hooks/useTasks';
 
 const IndexPage = () => {
-  const [tasks, setTasks] = useState<{ id: number; content: string }[]>([]);
-  const [content, setcontent] = useState('');
-
-  const addTask = () => {
-    setTasks([...tasks, { id: tasks.length, content }]);
-    setcontent('');
-  };
-
-  const deleteTask = (id: number) => {
-    setTasks(tasks.filter((task) => task.id !== id));
-  };
+  const { tasks, createTask, deleteTask } = useTasks();
 
   return (
-    <div className="container mx-auto max-w-md p-4">
-      <h1 className="mb-4 text-2xl">Task App</h1>
-      <div className="mb-4 flex">
-        <input
-          className="mr-2 w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-          type="text"
-          placeholder="New Task"
-          value={content}
-          onChange={(e) => setcontent(e.target.value)}
-        />
-        <button
-          className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-          onClick={addTask}
-        >
-          Add
-        </button>
-      </div>
-      <TaskList tasks={tasks} deleteTask={deleteTask} />
+    <div className="flex h-screen flex-col items-center justify-center bg-gray-100">
+      <h1 className="mb-4 text-3xl font-bold">タスク管理</h1>
+      <TaskForm onCreateTask={createTask} />
+      <TaskList tasks={tasks} onDelete={deleteTask} />
     </div>
   );
 };
