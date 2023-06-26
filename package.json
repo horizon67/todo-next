@@ -28,6 +28,7 @@
     "postbuild": "next-sitemap"
   },
   "dependencies": {
+    "@testing-library/user-event": "^14.4.3",
     "next": "^13.3.0",
     "next-seo": "^5.15.0",
     "next-sitemap": "^4.0.6",

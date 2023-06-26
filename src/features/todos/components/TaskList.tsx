@@ -1,6 +1,6 @@
+import type { Task } from 'openapi/types/api';
 import React from 'react';
 
-import type { Task } from '../../../../openapi/types/api';
 import { TaskItem } from './TaskItem';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
   onDelete: (id: number) => void;
 };
 
-const getTaskClassName = (state?: string) => {
+export const getTaskClassName = (state?: string) => {
   if (state === 'doing') {
     return 'bg-blue-200';
   }

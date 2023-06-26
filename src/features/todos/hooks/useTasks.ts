@@ -1,7 +1,6 @@
+import type { Task, TaskRequest } from 'openapi/types/api';
+import { TasksApi } from 'openapi/types/api';
 import { useCallback, useEffect, useState } from 'react';
-
-import type { Task, TaskRequest } from '../../../../openapi/types/api';
-import { TasksApi } from '../../../../openapi/types/api';
 
 export function useTasks() {
   const [tasks, setTasks] = useState<Task[]>([]);

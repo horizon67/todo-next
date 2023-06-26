@@ -1,6 +1,5 @@
+import type { Task } from 'openapi/types/api';
 import React from 'react';
-
-import type { Task } from '../../../../openapi/types/api';
 
 type Props = {
   task: Task;
